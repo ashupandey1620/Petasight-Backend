@@ -21,7 +21,7 @@ def chat(req: ChatRequest):
         return {
             "type": msg_type,
             "sentiment": "neutral",
-            "response": "Number received."
+            "response": f"Number received: {req.message}"
         }
 
     if msg_type == "deadline":
