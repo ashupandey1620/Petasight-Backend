@@ -15,6 +15,23 @@ def chat(req: ChatRequest):
 
     msg_type = classify_message(req.message)
     sentiment = sentiment_score(req.message)
+
+    # NOT calling LLM for all cases
+    if msg_type == "number":
+        return {
+            "type": msg_type,
+            "sentiment": "neutral",
+            "response": "Number received."
+        }
+
+    if msg_type == "deadline":
+        return {
+            "type": msg_type,
+            "sentiment": "neutral",
+            "response": "Deadline noted."
+        }
+
+    # Only for tone
     response = generate_response(req.message)
 
     return {
